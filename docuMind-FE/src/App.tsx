@@ -4,31 +4,21 @@ import { Layout, theme } from "antd";
 import "./App.css";
 import SideBar from "./components/sidebar/SideBar";
 import HeaderSection from "./components/header/HeaderSection";
-
-const { Content } = Layout;
+import ContentSection from "./components/content/ContentSection";
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [newChat, setNewChat] = useState(true);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <SideBar collapsed={collapsed} />
+      <SideBar collapsed={collapsed} setNewChat={setNewChat}/>
       <Layout style={{ minHeight: "100vh" }}>
         <HeaderSection collapsed={collapsed} setCollapsed={setCollapsed} colorBgContainer={colorBgContainer}/>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          Content
-        </Content>
+        <ContentSection borderRadiusLG={borderRadiusLG} colorBgContainer={colorBgContainer} newChat={newChat} setNewChat={setNewChat}/>
       </Layout>
     </Layout>
   );

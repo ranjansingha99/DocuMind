@@ -2,13 +2,14 @@ import { Layout } from "antd";
 const { Sider } = Layout;
 import style from "./SideBar.module.css";
 import sidebarlogo from "../../assets/sidebar-logo.png";
-import Uploader from "./features/Uploader";
+import NewChat from "./features/NewChat";
 
 interface SideBarProps {
   collapsed?: boolean;
+  setNewChat: (value: boolean) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ collapsed }) => {
+const SideBar: React.FC<SideBarProps> = ({ collapsed, setNewChat }) => {
   return (
     <>
       <Sider
@@ -37,7 +38,9 @@ const SideBar: React.FC<SideBarProps> = ({ collapsed }) => {
               </p>
             </div>
 
-            <Uploader />
+            <div className={style.newChatButton}>
+              <NewChat setNewChat={setNewChat} />
+            </div>
           </>
         ) : (
           <img src={sidebarlogo} alt="D" className={style.logo} />

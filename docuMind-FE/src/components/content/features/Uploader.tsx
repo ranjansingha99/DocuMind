@@ -6,6 +6,10 @@ import style from "./Uploader.module.css";
 
 const { Dragger } = Upload;
 
+interface UploaderProps {
+  setIsAnalyzeButton: (value: boolean) => void;
+}
+
 const props: UploadProps = {
   name: "file",
   multiple: false,
@@ -26,20 +30,24 @@ const props: UploadProps = {
   },
 };
 
-const App: React.FC = () => (
-  <div className={style.dragger}>
-    <Dragger {...props}>
-      <p className="ant-upload-drag-icon">
-        <InboxOutlined />
-      </p>
-      <p className="ant-upload-text">
-        Click or drag file to this area to upload
-      </p>
-      <p className="ant-upload-hint">
-        Upload the PDF here
-      </p>
-    </Dragger>
-  </div>
-);
+const Uploader: React.FC<UploaderProps> = ({ setIsAnalyzeButton }) => {
+  // will enable Analyze button upon successful upload setIsAnalyzeButton(true)
 
-export default App;
+  // on unsuccessful just show notification
+  setIsAnalyzeButton(true);
+  return (
+    <div className={style.dragger}>
+      <Dragger {...props}>
+        <p className="ant-upload-drag-icon">
+          <InboxOutlined />
+        </p>
+        <p className="ant-upload-text">
+          Click or drag file to this area to upload
+        </p>
+        <p className="ant-upload-hint">Upload the PDF here</p>
+      </Dragger>
+    </div>
+  );
+};
+
+export default Uploader;
