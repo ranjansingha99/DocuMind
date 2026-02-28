@@ -16,14 +16,9 @@ const initialState: AnalyzeState = {
 export const uploadPdf = createAsyncThunk(
   "api/upload",
   async (formData: FormData) => {
-    const res = await api.post("/api/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
+    const res = await api.post("/api/files/upload", formData);
     return res.data;
-  },
+  }
 );
 
 const uploadSlice = createSlice({
